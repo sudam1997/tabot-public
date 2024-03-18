@@ -1,0 +1,211 @@
+
+/* Default styles for larger screens */
+.chatbot {
+  font-family: monospace;
+  border-radius: 10px;
+  box-shadow: 0 12px 24px 0 rgba(0, 0, 0, 0.15);
+  background: #f5f8fb;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  /* width: 650px; */
+  width: 120vh;
+  height: 100vh;
+  overflow: hidden;
+  margin: auto; /* Align to the center */
+  margin-bottom: 0%;
+  padding-bottom: 0%;
+  border-bottom: 0%;
+}
+
+
+/* Conversation ID styles */
+.conversation-id {
+  margin-top: 10px;
+  color: #555;
+  font-size: 18px;
+  text-align: left; /* Align to the left */
+  margin-right: auto; /* Push to the left */
+}
+/* Conversation ID styles */
+
+.feedback-link {
+  margin-top: 10px;
+  color: #66a3ff; /* Lighter shade of blue */
+  font-size: 18px;
+  text-align: left; /* Align to the left */
+  margin-right: auto; /* Push to the left */
+  cursor: pointer;
+  transition: color 0.3s ease-in-out; /* Add a smooth color transition */
+}
+
+.feedback-link:hover {
+  color: #3366cc; /* Slightly darker shade on hover */
+}
+
+
+
+
+
+/* Header styles for larger screens */
+.header {
+  background-color: #7209bd;
+  color: #fff;
+  padding: 20px;
+  display: flex; /* Use flex display to manage content alignment */
+  align-items: center; /* Vertically align content */
+  height: auto;
+}
+
+.header_left {
+  height: 100%; /* Set the height of the left section to 100% */
+}
+
+.header_center {
+  display: flex;
+  flex-direction: column; /* Stack the text vertically */
+  align-items: center; /* Center text vertically within its div */
+  font-weight: bold;
+  font-family: sans-serif;
+  font-size: 35px;
+
+}
+
+.header_logo {
+  width: 30px; /* Adjust the width of your logo as needed */
+  height: 100%; /* Set the height of the logo to 100% */
+  margin-right: 10px; /* Add some spacing between the logo and text */
+}
+
+/* Header logo styles for larger screens */
+.header_logo {
+  width: 75px; /* Adjust the width of your logo as needed */
+  height: auto; /* Maintain aspect ratio */
+  margin-right: 25px; /* Add some spacing between the logo and text */
+  margin-left: 5px; /* Provide a valid unit for margin-left */
+}
+
+/* Message container styles for larger screens */
+.messages {
+  width: 100%;
+  /* height: 400px; */
+  height: 100%;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0px;
+  overflow-y: scroll;
+  scroll-behavior: smooth; /* For smooth scrolling */
+}
+
+/* Bot message styles for larger screens */
+.bot-message {
+  float: left;
+  padding: 15px 20px;
+  margin: 5px;
+  border-radius: 20px 20px 20px 1px;
+  background: #00aaa5;
+  color: white;
+  min-width: 40px;
+  font-family: "Helvetica";
+  font-size: 16px;
+  text-align: left;
+  white-space: pre-line; /* This property allows for line breaks */
+}
+
+/* User message styles for larger screens */
+.user-message {
+  float: right;
+  padding: 15px 10px;
+  margin: 10px;
+  border-radius: 20px 20px 1px 20px;
+  background: #cccccc;
+  color: black;
+  font-family: "Helvetica";
+  font-size: 16px;
+  text-align: left;
+}
+
+/* Input field styles for larger screens */
+.input {
+  position: bottom;
+}
+
+.input > form > input[type="text"] {
+  font-family: monospace;
+  font-size: 20px;
+  border: 0;
+  border-radius: 0;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  border-top: 1px solid #eee;
+  box-shadow: none;
+  box-sizing: border-box;
+  opacity: 1;
+  outline: none;
+  padding: 16px 52px 16px 10px;
+  width: calc(100% - 52px);
+  height:auto;
+  -webkit-appearance: none;
+}
+
+.input > form > input:focus {
+  outline: none;
+}
+
+.input > form > button {
+  background-color: transparent;
+  border: 0;
+  border-bottom-right-radius: 10px;
+  box-shadow: none;
+  cursor: pointer;
+  fill: #4a4a4a;
+  opacity: 1;
+  outline: none;
+  padding: 14px 16px 12px 16px;
+  position: static;
+  right: 0;
+  top: 0;
+}
+
+/* Media query for smaller screens (e.g., mobile devices) */
+@media screen and (max-width: 767px) {
+  .chatbot {
+    width: 100%;
+    height:100%
+  }
+
+  .feedback-link {
+    font-size: 16px; /* Adjust the font size for smaller screens */
+  }
+
+  .header {
+    font-size: 20px;
+  max-height: 100px; /* Adjust the header height for smaller screens */
+  }
+
+  .header_logo {
+    width: 50px; /* Adjust the logo width for smaller screens */
+    margin-right: 10px;
+    margin-left: 10px;
+  }
+
+  .messages {
+    height: 300px;
+    font-size: 14px;
+  /* Adjust other component styles for smaller screens as needed */
+  .bot-message,
+  .user-message,
+  .input {
+    font-size: 14px;
+  }
+  }
+
+}
+
+/* Add this style for smooth scrolling in WebKit browsers (e.g., Chrome) */
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+  .messages {
+    overflow-y: auto;
+  }
+}

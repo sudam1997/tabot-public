@@ -1,0 +1,70 @@
+version: '3.8'
+
+services:
+  redis-stack:
+    image: redis/redis-stack:latest
+    restart: always
+    container_name: redis-stack
+    ports:
+      - "6379:6379"
+      - "8001:8001"
+    volumes:
+      - ./INFRASTRUCTURE/Redis/data:/data
+      - ./INFRASTRUCTURE/Redis/redis-stack.conf:/redis-stack.conf
+    networks:
+      - host-network
+
+
+  mongodb:
+    image: mongodb/mongodb-community-server:latest
+    user: "1000:1000"
+    restart: always
+    container_name: mongo-server
+    ports:
+      - 27017:27017
+    volumes:
+      - ./INFRASTRUCTURE/Mongo/mongod.conf/mongd.conf:/etc/mongod.conf  # Make sure the file path is correct
+      - ./INFRASTRUCTURE/Mongo/mongo_data:/data/db
+    entrypoint: ["mongod", "--auth", "--config", "/etc/mongod.conf"]
+    networks:
+      - host-network
+
+
+  remove-idle-conversations:
+    image: remove-conversation-python:ucsc
+    user: "1000:1000"
+    container_name: remove-conversations
+    volumes:
+      - ./Remove_Idle_Conversations:/app
+      - ./app/conversation.py:/app/conversation.py
+      - ./app/mongodb.py:/app/mongodb.py
+      - ./app/TaBotRadis.py:/app/TaBotRadis.py
+    command: sh -c "python -u /app/remove_idleConversations.py"
+    restart: always
+    networks:
+      - host-network
+    depends_on:
+      - redis-stack
+      - mongodb
+
+  api-service:
+    image: api-service:ucsc
+    user: "1000:1000"
+    container_name: api-service
+    ports:
+      - 5005:5005
+    depends_on:
+      - redis-stack
+      - mongodb
+    volumes:
+      - ./app:/app
+    networks:
+      - host-network
+    command: sh -c "gunicorn --bind 0.0.0.0:5005 wsgi:app"
+    restart: always
+
+
+
+networks:
+  host-network:
+    driver: bridge
